@@ -1,0 +1,31 @@
+name: Update README with Latest Repo
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每小时运行一次
+  workflow_dispatch: # 手动触发
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Get latest repo
+        id: get-latest-repo
+        run: |
+          curl -s https://api.github.com/users/Sheep118/repos?sort=updated \
+          | jq -r '.[0].html_url' > latest_repo.txt
+
+      - name: Update README
+        run: |
+          latest_repo=$(cat latest_repo.txt)
+          sed -i "s|<!--LATEST_REPO-->|[$latest_repo]($latest_repo)|" README.md
+
+      - name: Commit changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update latest repo link"
+          git push
