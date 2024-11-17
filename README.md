@@ -5,8 +5,8 @@
 - 💬 Ask me about anything related to EmbeddedC/C++/Python.
 - 😄 Read more about my CSDN: [here](https://blog.csdn.net/weixin_51915497?type=blog)
 
-![GitHub Streak](https://streak-stats.demolab.com/?user=Sheep118&card_width=450&theme=ambient_gradient)
-![](https://github-readme-stats.vercel.app/api?username=Sheep118&show_icons=true&theme=ambient_gradient)
+![GitHub Streak](https://streak-stats.demolab.com/?user=Sheep118&card_width=400&theme=ambient_gradient)
+![](https://github-readme-stats.vercel.app/api?username=Sheep118&show_icons=true&theme=ambient_gradient&card_width=400)
 
 <!--
 **Sheep118/Sheep118** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
