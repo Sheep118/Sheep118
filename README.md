@@ -1,6 +1,6 @@
 ### Hi there 👋,I'm Sheep118.
 
-- 🔭 I’m currently working on <!--LATEST_REPO-->[something cool](https://github.com/Sheep118/LatestRepoName)<!--LATEST_REPO-->.
+- 🔭 I’m currently working on <!--LATEST_REPO-->[something cool](https://github.com/Sheep118/LanQiaoEmbed)<!--LATEST_REPO-->.
 - 🌱 I’m currently learning Everything I like.
 - 💬 Ask me about anything related to EmbeddedC/C++/Python.
 - 😄 Read more about my CSDN: [here](https://blog.csdn.net/weixin_51915497?type=blog)
