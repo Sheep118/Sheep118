@@ -2,7 +2,7 @@ name: Update README with Latest Repo
 
 on:
   schedule:
-    - cron: '0 * * * *' # 每小时运行一次
+    - cron: '0 0 * * *' # 每小时运行一次
   workflow_dispatch: # 手动触发工作流
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
     - name: Update README
       run: |
         # 替换 README 中的链接部分，保留占位符
-        sed -i 's|\(<!--LATEST_REPO-->\)[^\(]*(https://github.com/[^)]*)\(<!--LATEST_REPO-->\)|\1[something cool]('"${LATEST_REPO}"')\3|' README.md
+        sed -i 's|<!--LATEST_REPO-->.*<!--LATEST_REPO-->|<!--LATEST_REPO-->[something cool]('"${LATEST_REPO}"')<!--LATEST_REPO-->|' README.md
 
         # 确保更新后的内容
         echo "Updated README.md:"
