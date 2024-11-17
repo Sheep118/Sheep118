@@ -1,4 +1,12 @@
-## Hi there 👋
+### Hi there 👋,I'm Sheep118.
+
+- 🔭 I’m currently working on [somethig cool](<!--LATEST_REPO-->).
+- 🌱 I’m currently learning Everything I like.
+- 💬 Ask me about anything related to EmbeddedC/C++/Python.
+- 😄 Read more about my CSDN: [here](https://blog.csdn.net/weixin_51915497?type=blog)
+
+![GitHub Streak](https://streak-stats.demolab.com/?user=Sheep118&theme=ambient_gradient)
+![](https://github-readme-stats.vercel.app/api?username=Sheep118&show_icons=true&theme=ambient_gradient)
 
 <!--
 **Sheep118/Sheep118** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
