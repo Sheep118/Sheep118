@@ -2,30 +2,56 @@ name: Update README with Latest Repo
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 每小时运行一次
-  workflow_dispatch: # 手动触发
+    - cron: '0 * * * *' # 每小时运行一次
+  workflow_dispatch: # 手动触发工作流
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    # 1. 检出代码
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Get latest repo
-        id: get-latest-repo
-        run: |
-          curl -s https://api.github.com/users/Sheep118/repos?sort=updated \
-          | jq -r '.[0].html_url' > latest_repo.txt
+    # 2. 获取最新更新的仓库（排除 Sheep118）
+    - name: Get latest repository (excluding Sheep118)
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # 获取按更新时间排序的仓库列表并排除 Sheep118
+        LATEST_REPO=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+        https://api.github.com/users/Sheep118/repos?sort=updated \
+        | jq -r '.[] | select(.name != "Sheep118") | .html_url' | head -n 1)
 
-      - name: Update README
-        run: |
-          latest_repo=$(cat latest_repo.txt)
-          sed -i "s|<!--LATEST_REPO-->|[$latest_repo]($latest_repo)|" README.md
+        echo "Latest repository: $LATEST_REPO"
 
-      - name: Commit changes
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -am "Update latest repo link"
-          git push
+        # 确保找到最新仓库
+        if [ -z "$LATEST_REPO" ]; then
+          echo "No repository found to update."
+          exit 1
+        fi
+
+        # 保存仓库链接到环境变量
+        echo "LATEST_REPO=$LATEST_REPO" >> $GITHUB_ENV
+
+    # 3. 更新 README 文件
+    - name: Update README
+      run: |
+        # 从环境变量中获取最新仓库链接
+        sed -i 's|<!--LATEST_REPO-->|[something cool]('"${LATEST_REPO}"')|' README.md
+
+        # 确保更新后的内容
+        echo "Updated README.md:"
+        cat README.md
+
+    # 4. 提交更改并推送到仓库
+    - name: Commit and push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git add README.md
+        git commit -m "Update README with latest repo link" || echo "No changes to commit"
+        git push || echo "Nothing to push"
